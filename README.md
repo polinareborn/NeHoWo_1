@@ -65,18 +65,56 @@ class Reviewer(Mentor):
             return 'Ошибка'
     def __str__(self):
         return f"Имя : {self.name}\nФамилия : {self.surname}"
+def average_grade_on_the_course_st(students, course):
+    if not isinstance(students, list):
+        return "Not list"
+    all_average_grade = []
+    for student  in students:
+        all_average_grade.extend(student.average_grade_course_st.get(course, []))
+    if not all_average_grade:
+        return "По такому курсу ни у кого нет оценок"
+    return round(sum(all_average_grade) / len(all_average_grade), 2)
+def average_grade_on_the_course_lctr(lecturers, course):
+    if not isinstance(lecturers, list):
+        return "Not list"
+    all_average_grade = []
+    for lecturer  in lecturers:
+        all_average_grade.extend(lecturer.average_grade_course_st.get(course, []))
+    if not all_average_grade:
+        return "По такому курсу ни у кого нет оценок"
+    return round(sum(all_average_grade) / len(all_average_grade), 2)
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+student_1 = Student('Юрий', 'Ананикян', 'Мужчина')
+student_1.courses_in_progress += ['Python']
+student_1.finished_courses += ['C++']
+student_1.finished_courses += ['JavaScript']
+student_1.finished_courses += ["Основы программирования"]
+student_1.grades = {'Python': [9.5], 'JavaScript': [7.5], 'C++': [9.0]}
 
-cool_mentor = Mentor('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+student_2 = Student('Надежда', 'Агафонова', 'Женщина')
+student_2.courses_in_progress += ['Python']
+student_2.finished_courses += ['JavaScript']
+student_2.finished_courses +=["Основы программирования"]
+student_2.grades = {'Python': [9.5], 'JavaScript': [8.9]}
 
+student_list=[student_1, student_2]
 
+mentor_1=Mentor('Виталий','Одинцов')
+mentor_1.courses_attached=['Python', 'C++']
 
-#cool_mentor.rate_hw(best_student, 'Python', 10)
-#cool_mentor.rate_hw(best_student, 'Python', 10)
-#cool_mentor.rate_hw(best_student, 'Python', 10)
+mentor_2=Mentor('Вероника', 'Княжна')
+mentor_2.courses_attached=['Python', 'C++','JavaScript']
 
+lecturer_1=Lecturer('Виктор','Беспаленов')
+lecturer_1.courses_attached=['Python' ]
+lecturer_1.grades={'Python' : [8.5]}
 
-print(best_student.grades)
+lecturer_2=Lecturer('Анастас','Сихиди')
+lecturer_2.courses_attached=['C++', 'JavaScript']
+lecturer_2.grades={'С++' : [8.5],'JavaScript' : [7.5]}
+
+reviewer_1=Reviewer('Антон', 'Усепов')
+reviewer_1.courses_attached=['Python', 'C++','JavaScript']
+
+reviewer_1=Reviewer('Валентина', 'Шевченко')
+reviewer_1.courses_attached=['Python', 'C++','JavaScript']
